@@ -4,11 +4,11 @@ export const STATUS = {
   DONE: "done",
 };
 
-export function createTask(id, title) {
+export function createTask(id, title, dueDate = null) {
   if (!title.trim()) {
     throw new Error("title is required");
   }
-  return { id, title, status: STATUS.TODO };
+  return { id, title, status: STATUS.TODO, dueDate };
 }
 
 export function withStatus(task, status) {
@@ -20,4 +20,8 @@ export function withStatus(task, status) {
 
 export function isOpen(task) {
   return task.status !== STATUS.DONE;
+}
+
+export function isOverdue(task, now) {
+  return isOpen(task) && task.dueDate !== null && task.dueDate < now;
 }
