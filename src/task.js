@@ -17,3 +17,7 @@ export function withStatus(task, status) {
   }
   return { ...task, status };
 }
+
+export function isOpen(task) {
+  return task.status !== STATUS.DONE;
+}
